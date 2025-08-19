@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carpas Natura - Experiencia Única en la Naturaleza</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        /* Colores principales */
+        --primary-green: #1a4301;
+        --light-green: #2d5a27;
+        --accent-green: #4caf50;
+        --soft-green: #81c784;
+        --nature-green: #66bb6a;
+
+        /* Tonos tierra y beige */
+        --warm-beige: #f7f3f0;
+        --soft-beige: #f1ede8;
+        --earth-brown: #8d6e63;
+        --golden-beige: #ddd6c7;
+
+        /* Grises neumórficos */
+        --bg-primary: #f0f2f5;
+        --bg-secondary: #ffffff;
+        --bg-tertiary: #e8ecf0;
+        --bg-dark: #1e1e1e;
+
+        /* Texto */
+        --text-primary: #1a1a1a;
+        --text-secondary: #4a4a4a;
+        --text-light: #8a8a8a;
+        --text-white: #ffffff;
+
+        /* Sombras neumórficas */
+        --shadow-neumorphic: 9px 9px 18px rgba(163, 177, 198, 0.6),
+          -9px -9px 18px rgba(255, 255, 255, 0.5);
+        --shadow-neumorphic-inset: inset 6px 6px 12px rgba(163, 177, 198, 0.4),
+          inset -6px -6px 12px rgba(255, 255, 255, 0.7);
+        --shadow-neumorphic-pressed: inset 4px 4px 8px rgba(163, 177, 198, 0.6),
+          inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+        --shadow-floating: 0 20px 40px rgba(0, 0, 0, 0.1),
+          0 8px 24px rgba(0, 0, 0, 0.08);
+
+        /* Glassmorphism */
+        --glass-bg: rgba(255, 255, 255, 0.25);
+        --glass-border: rgba(255, 255, 255, 0.18);
+        --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+
+        /* Transiciones */
+        --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.7;
+        color: var(--text-primary);
+        background: linear-gradient(
+          135deg,
+          var(--bg-primary) 0%,
+          var(--soft-beige) 100%
+        );
+        overflow-x: hidden;
+      }
+
+      /* Tipografía */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      /* Header neumórfico */
+      header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 2000;
+        padding: 1rem 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15),
+          0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-green);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        transition: var(--transition-smooth);
+      }
+
+      .logo:hover {
+        transform: translateY(-2px);
+        color: var(--accent-green);
+      }
+
+      .logo i {
+        font-size: 2.2rem;
+        background: linear-gradient(
+          135deg,
+          var(--accent-green),
+          var(--nature-green)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 0.5rem;
+      }
+
+      .nav-links li {
+        position: relative;
+      }
+
+      .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        transition: var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--accent-green);
+        background: var(--bg-secondary);
+        box-shadow: var(--shadow-neumorphic);
+        transform: translateY(-2px);
+      }
+
+      .mobile-menu {
+        display: none;
+        background: var(--bg-secondary);
+        border: none;
+        color: var(--primary-green);
+        font-size: 1.5rem;
+        padding: 1rem;
+        border-radius: 15px;
+        cursor: pointer;
+        box-shadow: var(--shadow-neumorphic);
+        transition: var(--transition-smooth);
+      }
+
+      .mobile-menu:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-floating);
+      }
+
+      /* Hero Section avanzado */
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--text-white);
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(
+          135deg,
+          rgba(26, 67, 1, 0.9) 0%,
+          rgba(45, 90, 39, 0.8) 50%,
+          rgba(76, 175, 80, 0.7) 100%
+        );
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(76, 175, 80, 0.3) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(129, 199, 132, 0.3) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 80%,
+            rgba(102, 187, 106, 0.3) 0%,
+            transparent 50%
+          ),
+          url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="1200" height="600" fill="url(%23grid)"/></svg>');
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        padding: 2rem;
+      }
+
+      .hero-content h1 {
+        font-size: clamp(3rem, 8vw, 5rem);
+        margin-bottom: 1.5rem;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.2rem, 3vw, 1.6rem);
+        margin-bottom: 2rem;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        opacity: 0.95;
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeInUp 1s ease-out 0.6s both;
+      }
+
+      .cta-button {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: var(--text-white);
+        padding: 1.2rem 2.5rem;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: var(--transition-bounce);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.7s;
+      }
+
+      .cta-button:hover::before {
+        left: 100%;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        background: rgba(76, 175, 80, 0.8);
+      }
+
+      .cta-secondary {
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .cta-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* Secciones neumórficas */
+      section {
+        padding: clamp(4rem, 8vw, 8rem) 0;
+        position: relative;
+      }
+
+      section:nth-child(even) {
+        background: linear-gradient(
+          135deg,
+          var(--warm-beige) 0%,
+          var(--bg-secondary) 100%
+        );
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        color: var(--primary-green);
+        margin-bottom: 4rem;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(
+          135deg,
+          var(--accent-green),
+          var(--nature-green)
+        );
+        margin: 2rem auto;
+        border-radius: 2px;
+      }
+
+      /* Cards neumórficas avanzadas */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        margin-top: 4rem;
+      }
+
+      .service-card {
+        background: var(--bg-secondary);
+        padding: 3rem 2rem;
+        border-radius: 25px;
+        text-align: center;
+        transition: var(--transition-bounce);
+        box-shadow: var(--shadow-neumorphic);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          135deg,
+          var(--accent-green),
+          var(--nature-green)
+        );
+        transform: scaleX(0);
+        transition: transform 0.6s ease;
+      }
+
+      .service-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-floating);
+      }
+
+      .service-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 2rem;
+        background: linear-gradient(
+          135deg,
+          var(--accent-green),
+          var(--nature-green)
+        );
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-white);
+        font-size: 2rem;
+        box-shadow: var(--shadow-neumorphic);
+        transition: var(--transition-smooth);
+      }
+
+      .service-card:hover .service-icon {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: var(--shadow-floating);
+      }
+
+      .service-card h3 {
+        color: var(--primary-green);
+        margin-bottom: 1.5rem;
+        font-size: 1.4rem;
+      }
+
+      .service-card p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      /* About section mejorada */
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .about-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+
+      .about-text h3 {
+        color: var(--primary-green);
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+
+      .about-text p {
+        margin-bottom: 1.5rem;
+        color: var(--text-secondary);
+      }
+
+      .about-image {
+        background: linear-gradient(
+          135deg,
+          var(--accent-green),
+          var(--nature-green)
+        );
+        height: 500px;
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-white);
+        font-size: 5rem;
+        box-shadow: var(--shadow-floating);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-image::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        animation: rotate 10s linear infinite;
+      }
+
+      /* Formulario neumórfico premium */
+      .reservation-form {
+        background: var(--bg-secondary);
+        padding: 4rem;
+        border-radius: 30px;
+        box-shadow: var(--shadow-floating);
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+        color: var(--primary-green);
+        font-size: 1rem;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 1.2rem 1.5rem;
+        border: none;
+        border-radius: 15px;
+        font-size: 1rem;
+        background: var(--bg-primary);
+        box-shadow: var(--shadow-neumorphic-inset);
+        transition: var(--transition-smooth);
+        color: var(--text-primary);
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        box-shadow: var(--shadow-neumorphic-inset),
+          0 0 0 3px rgba(76, 175, 80, 0.2);
+      }
+
+      .btn-submit {
+        background: linear-gradient(
+          135deg,
+          var(--accent-green),
+          var(--nature-green)
+        );
+        color: var(--text-white);
+        padding: 1.4rem 3rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        transition: var(--transition-bounce);
+        box-shadow: var(--shadow-neumorphic);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-submit::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.6s;
+      }
+
+      .btn-submit:hover::before {
+        left: 100%;
+      }
+
+      .btn-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-floating);
+      }
+
+      .btn-submit:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow-neumorphic-pressed);
+      }
+
+      /* Galería premium */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 4rem;
+      }
+
+      .gallery-item {
+        background: linear-gradient(
+          135deg,
+          var(--accent-green),
+          var(--nature-green)
+        );
+        height: 300px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-white);
+        font-size: 3rem;
+        transition: var(--transition-bounce);
+        cursor: pointer;
+        box-shadow: var(--shadow-neumorphic);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .gallery-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          45deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 70%
+        );
+        transform: translateX(-100%);
+        transition: transform 0.6s;
+      }
+
+      .gallery-item:hover::before {
+        transform: translateX(100%);
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: var(--shadow-floating);
+      }
+
+      /* Testimonios premium */
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2.5rem;
+        margin-top: 4rem;
+      }
+
+      .testimonial {
+        background: var(--bg-secondary);
+        padding: 3rem 2.5rem;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: var(--shadow-neumorphic);
+        transition: var(--transition-smooth);
+        position: relative;
+      }
+
+      .testimonial::before {
+        content: '"';
+        position: absolute;
+        top: -20px;
+        left: 30px;
+        font-size: 8rem;
+        color: var(--accent-green);
+        opacity: 0.1;
+        font-family: "Playfair Display", serif;
+      }
+
+      .testimonial:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-floating);
+      }
+
+      .testimonial-text {
+        font-style: italic;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: var(--text-secondary);
+      }
+
+      .testimonial-author {
+        font-weight: 600;
+        color: var(--primary-green);
+        font-size: 1.1rem;
+      }
+
+      .stars {
+        color: #ffa726;
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+      }
+
+      /* Contacto mejorado */
+      .contact-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2.5rem;
+        margin-bottom: 4rem;
+      }
+
+      .contact-item {
+        text-align: center;
+        padding: 3rem 2rem;
+        background: var(--bg-secondary);
+        border-radius: 25px;
+        box-shadow: var(--shadow-neumorphic);
+        transition: var(--transition-smooth);
+      }
+
+      .contact-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-floating);
+      }
+
+      .contact-item i {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(
+          135deg,
+          var(--accent-green),
+          var(--nature-green)
+        );
+        color: var(--text-white);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        margin: 0 auto 1.5rem;
+        box-shadow: var(--shadow-neumorphic);
+      }
+
+      .contact-item h3 {
+        color: var(--primary-green);
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .contact-item p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      .map-container {
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: var(--shadow-floating);
+        height: 450px;
+        background: linear-gradient(
+          135deg,
+          var(--accent-green),
+          var(--nature-green)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-white);
+        font-size: 1.5rem;
+        text-align: center;
+      }
+
+      /* Footer premium */
+      footer {
+        background: linear-gradient(
+          135deg,
+          var(--primary-green),
+          var(--light-green)
+        );
+        color: var(--text-white);
+        text-align: center;
+        padding: 4rem 0 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200"><path d="M0,100 C300,20 600,180 1200,100 L1200,200 L0,200 Z" fill="rgba(255,255,255,0.03)"/></svg>')
+          repeat-x;
+        background-size: 1200px 200px;
+      }
+
+      .footer-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .social-links {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .social-links a {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--text-white);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        transition: var(--transition-smooth);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .social-links a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Animaciones */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .fade-in-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      .fade-in-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .fade-in-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      .fade-in-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Responsive Design Avanzado */
+      @media (max-width: 1200px) {
+        .container {
+          padding: 0 1.5rem;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .about-content {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .services-grid {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 2rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(20px);
+          flex-direction: column;
+          padding: 2rem;
+          border-radius: 0 0 25px 25px;
+          box-shadow: var(--shadow-floating);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .nav-links a {
+          text-align: center;
+          padding: 1rem;
+          margin: 0.5rem 0;
+        }
+
+        .mobile-menu {
+          display: block;
+        }
+
+        .hero-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-cta {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cta-button {
+          width: 100%;
+          max-width: 300px;
+        }
+
+        .reservation-form,
+        .about-image {
+          margin: 0 1rem;
+        }
+
+        .reservation-form {
+          padding: 2.5rem 2rem;
+        }
+
+        .testimonials-grid,
+        .contact-info {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 1.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 1rem;
+        }
+
+        .hero {
+          padding: 0 1rem;
+        }
+
+        .hero-content {
+          padding: 1rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .service-card,
+        .testimonial,
+        .contact-item {
+          padding: 2rem 1.5rem;
+        }
+
+        .reservation-form {
+          padding: 2rem 1.5rem;
+        }
+
+        .services-grid,
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Estados de carga y hover mejorados */
+      .loading {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .loading::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        animation: loading 1.5s infinite;
+      }
+
+      @keyframes loading {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      /* Scroll indicator */
+      .scroll-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--bg-tertiary);
+        z-index: 9999;
+      }
+
+      .scroll-progress {
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--accent-green),
+          var(--nature-green)
+        );
+        width: 0%;
+        transition: width 0.1s ease;
+      }
+
+      /* Botón scroll to top */
+      .scroll-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 60px;
+        height: 60px;
+        background: var(--bg-secondary);
+        color: var(--accent-green);
+        border: none;
+        border-radius: 18px;
+        cursor: pointer;
+        font-size: 1.5rem;
+        box-shadow: var(--shadow-neumorphic);
+        transition: var(--transition-smooth);
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1000;
+      }
+
+      .scroll-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .scroll-top:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-floating);
+        background: var(--accent-green);
+        color: var(--text-white);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <nav class="container">
+        <a href="#" class="logo">
+          <i class="fas fa-campground"></i>
+          Carpas Natura
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#reservas">Reservas</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <button class="mobile-menu" id="mobileMenu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+      <div class="hero-content">
+        <h1>Vive una Experiencia Única</h1>
+        <p class="hero-subtitle">
+          Disfruta de la naturaleza en pareja con nuestras cómodas carpas de
+          camping, rodeados de tranquilidad y aventura en un entorno mágico
+        </p>
+        <div class="hero-cta">
+          <a href="#reservas" class="cta-button">
+            <i class="fas fa-calendar-alt"></i> Reserva Ahora
+          </a>
+          <a href="#servicios" class="cta-button cta-secondary">
+            <i class="fas fa-info-circle"></i> Conoce Más
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nosotros -->
+    <section id="nosotros">
+      <div class="container">
+        <h2 class="section-title fade-in">Nosotros</h2>
+        <div class="about-content">
+          <div class="about-text fade-in-left">
+            <h3>Nuestra Historia</h3>
+            <p>
+              Carpas Natura nació del sueño de crear un espacio donde las
+              parejas puedan reconectarse con la naturaleza y entre sí. Ubicados
+              en un entorno privilegiado, ofrecemos una experiencia de camping
+              única que combina la aventura del aire libre con las comodidades
+              modernas.
+            </p>
+
+            <p>
+              Nos inspira la creencia de que los momentos más especiales surgen
+              cuando nos alejamos del bullicio de la ciudad y nos sumergimos en
+              la serenidad de la naturaleza. Cada detalle de nuestro servicio
+              está pensado para crear recuerdos inolvidables.
+            </p>
+
+            <p>
+              Lo que nos hace diferentes es nuestro enfoque personalizado, la
+              calidad de nuestras instalaciones y nuestro compromiso con brindar
+              una experiencia auténtica en contacto con el medio ambiente.
+            </p>
+          </div>
+          <div class="about-image fade-in-right">
+            <i class="fas fa-heart"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios">
+      <div class="container">
+        <h2 class="section-title fade-in">Nuestros Servicios</h2>
+        <div class="services-grid">
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <i class="fas fa-campground"></i>
+            </div>
+            <h3>Estadía en Carpas</h3>
+            <p>
+              Carpas completamente equipadas con camas cómodas, iluminación LED
+              y todos los elementos necesarios para una estadía perfecta en
+              medio de la naturaleza.
+            </p>
+          </div>
+
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <i class="fas fa-utensils"></i>
+            </div>
+            <h3>Comidas Incluidas</h3>
+            <p>
+              Disfruta de desayuno, almuerzo y cena preparados con ingredientes
+              frescos y recetas de temporada que resaltan los sabores locales y
+              orgánicos.
+            </p>
+          </div>
+
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <i class="fas fa-swimming-pool"></i>
+            </div>
+            <h3>Piscina Natural</h3>
+            <p>
+              Relájate en nuestra hermosa piscina rodeada de vegetación
+              exuberante, el lugar perfecto para refrescarte y disfrutar
+              momentos de tranquilidad.
+            </p>
+          </div>
+
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <i class="fas fa-route"></i>
+            </div>
+            <h3>Guía de Turismo</h3>
+            <p>
+              Explora los alrededores con nuestros guías locales expertos en
+              senderismo, avistamiento de fauna y descubrimiento de sitios de
+              interés cercanos.
+            </p>
+          </div>
+
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Parqueadero 24H</h3>
+            <p>
+              Tu vehículo estará completamente seguro en nuestro parqueadero
+              vigilado las 24 horas con sistema de seguridad avanzado.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reservas -->
+    <section id="reservas">
+      <div class="container">
+        <h2 class="section-title fade-in">Reservas</h2>
+        <div class="reservation-form fade-in">
+          <form id="reservationForm">
+            <div class="form-group">
+              <label for="nombres">
+                <i class="fas fa-user"></i> Nombres Completos
+              </label>
+              <input
+                type="text"
+                id="nombres"
+                name="nombres"
+                required
+                placeholder="Ingresa tu nombre completo"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">
+                <i class="fas fa-envelope"></i> Correo Electrónico
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="tu@email.com"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="telefono">
+                <i class="fas fa-phone"></i> Teléfono
+              </label>
+              <input
+                type="tel"
+                id="telefono"
+                name="telefono"
+                required
+                placeholder="+57 300 123 4567"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="checkin">
+                <i class="fas fa-calendar-check"></i> Fecha de Llegada
+              </label>
+              <input type="date" id="checkin" name="checkin" required />
+            </div>
+
+            <div class="form-group">
+              <label for="checkout">
+                <i class="fas fa-calendar-times"></i> Fecha de Salida
+              </label>
+              <input type="date" id="checkout" name="checkout" required />
+            </div>
+
+            <div class="form-group">
+              <label for="personas">
+                <i class="fas fa-users"></i> Número de Personas
+              </label>
+              <select id="personas" name="personas" required>
+                <option value="">Selecciona el número de personas...</option>
+                <option value="2">2 personas</option>
+                <option value="3">3 personas</option>
+                <option value="4">4 personas</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="comentarios">
+                <i class="fas fa-comment"></i> Comentarios Adicionales
+              </label>
+              <textarea
+                id="comentarios"
+                name="comentarios"
+                rows="4"
+                placeholder="Cuéntanos sobre alguna preferencia especial o solicitud que tengas..."
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              <i class="fas fa-paper-plane"></i> Enviar Reserva
+            </button>
+          </form>
+
+          <div
+            style="
+              text-align: center;
+              margin-top: 3rem;
+              padding-top: 3rem;
+              border-top: 2px solid var(--bg-tertiary);
+            "
+          >
+            <h4 style="color: var(--primary-green); margin-bottom: 1rem">
+              ¿Prefieres llamar directamente?
+            </h4>
+            <p
+              style="
+                font-size: 1.3rem;
+                color: var(--accent-green);
+                font-weight: 600;
+              "
+            >
+              <i class="fas fa-phone-alt"></i> +57 300 123 4567
+            </p>
+            <p style="color: var(--text-light); margin-top: 0.5rem">
+              Disponible 24/7 para atenderte
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria">
+      <div class="container">
+        <h2 class="section-title fade-in">Galería</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item fade-in">
+            <i class="fas fa-campground"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-mountain"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-swimming-pool"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-hiking"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-fire"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-tree"></i>
+          </div>
+          <div class="gallery-item fade-in">
+            <i class="fas fa-sun"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section id="testimonios">
+      <div class="container">
+        <h2 class="section-title fade-in">Testimonios</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial fade-in">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              Una experiencia increíble que superó todas nuestras expectativas.
+              Las carpas son extremadamente cómodas y el lugar es absolutamente
+              mágico. La comida es deliciosa y el servicio excepcional. Sin duda
+              volveremos muy pronto.
+            </p>
+            <div class="testimonial-author">- María y Carlos Rodríguez</div>
+          </div>
+
+          <div class="testimonial fade-in">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              Perfecto para desconectarse del estrés y reconectarse en pareja.
+              El guía turístico nos mostró lugares espectaculares que jamás
+              habríamos encontrado solos. Una experiencia que recomendamos al
+              100% a todas las parejas.
+            </p>
+            <div class="testimonial-author">- Ana y Diego Martínez</div>
+          </div>
+
+          <div class="testimonial fade-in">
+            <div class="stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              La atención al detalle es verdaderamente impresionante. Desde las
+              carpas hasta la piscina, todo está cuidadosamente pensado para
+              crear momentos especiales. ¡Superó nuestras expectativas y ya
+              estamos planeando volver!
+            </p>
+            <div class="testimonial-author">- Sofía y Andrés López</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto">
+      <div class="container">
+        <h2 class="section-title fade-in">Contacto</h2>
+        <div class="contact-info">
+          <div class="contact-item fade-in">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Ubicación</h3>
+            <p>
+              Vereda La Montaña<br />Km 15 Vía al Lago<br />Municipio Verde,
+              Colombia
+            </p>
+          </div>
+
+          <div class="contact-item fade-in">
+            <i class="fas fa-phone-alt"></i>
+            <h3>Teléfonos</h3>
+            <p>+57 300 123 4567<br />+57 1 234 5678</p>
+          </div>
+
+          <div class="contact-item fade-in">
+            <i class="fas fa-envelope"></i>
+            <h3>Email</h3>
+            <p>info@carpasnatura.com<br />reservas@carpasnatura.com</p>
+          </div>
+
+          <div class="contact-item fade-in">
+            <i class="fas fa-clock"></i>
+            <h3>Horarios</h3>
+            <p>
+              Check-in: 2:00 PM<br />Check-out: 12:00 PM<br />Atención: 24/7
+            </p>
+          </div>
+        </div>
+
+        <div class="map-container fade-in">
+          <div>
+            <i
+              class="fas fa-map"
+              style="font-size: 4rem; margin-bottom: 1rem"
+            ></i>
+            <h3>Ubicación en el Mapa</h3>
+            <p style="font-size: 1.1rem; margin-top: 1rem; opacity: 0.9">
+              Aquí se integraría el mapa interactivo de Google Maps
+            </p>
+            <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.7">
+              Coordenadas GPS disponibles al momento de la reserva
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container footer-content">
+        <h3 style="margin-bottom: 1rem; font-size: 1.5rem">Carpas Natura</h3>
+        <p style="margin-bottom: 2rem; opacity: 0.9">
+          Tu escape perfecto a la naturaleza
+        </p>
+        <p>&copy; 2025 Carpas Natura. Todos los derechos reservados.</p>
+        <div class="social-links">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+      // Variables globales
+      const mobileMenu = document.getElementById("mobileMenu");
+      const navLinks = document.getElementById("navLinks");
+      const scrollProgress = document.getElementById("scrollProgress");
+      const scrollTopBtn = document.getElementById("scrollTop");
+
+      // Menú móvil con animación
+      mobileMenu.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        const icon = mobileMenu.querySelector("i");
+        icon.classList.toggle("fa-bars");
+        icon.classList.toggle("fa-times");
+      });
+
+      // Cerrar menú al hacer click en un enlace
+      navLinks.addEventListener("click", (e) => {
+        if (e.target.tagName === "A") {
+          navLinks.classList.remove("active");
+          const icon = mobileMenu.querySelector("i");
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      // Smooth scroll mejorado para navegación
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            const offsetTop = target.offsetTop - 80;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Indicador de progreso de scroll
+      window.addEventListener("scroll", () => {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        scrollProgress.style.width = scrollPercent + "%";
+
+        // Mostrar/ocultar botón scroll to top
+        if (scrollTop > 300) {
+          scrollTopBtn.classList.add("visible");
+        } else {
+          scrollTopBtn.classList.remove("visible");
+        }
+      });
+
+      // Botón scroll to top
+      scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // Animaciones avanzadas al hacer scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -30px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            // Añadir delay progresivo para animaciones en grupo
+            setTimeout(() => {
+              entry.target.classList.add("visible");
+            }, index * 100);
+          }
+        });
+      }, observerOptions);
+
+      // Observar elementos con diferentes clases de animación
+      document
+        .querySelectorAll(".fade-in, .fade-in-left, .fade-in-right")
+        .forEach((el) => {
+          observer.observe(el);
+        });
+
+      // Manejar envío del formulario con validación avanzada
+      document
+        .getElementById("reservationForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Añadir animación de carga al botón
+          const submitBtn = this.querySelector(".btn-submit");
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+          submitBtn.disabled = true;
+
+          // Simular envío
+          setTimeout(() => {
+            // Mostrar mensaje de éxito
+            const successMessage = document.createElement("div");
+            successMessage.innerHTML = `
+                    <div style="
+                        background: linear-gradient(135deg, var(--accent-green), var(--nature-green));
+                        color: white;
+                        padding: 1.5rem;
+                        border-radius: 15px;
+                        text-align: center;
+                        margin-top: 2rem;
+                        box-shadow: var(--shadow-floating);
+                    ">
+                        <i class="fas fa-check-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <h4>¡Reserva Enviada Exitosamente!</h4>
+                        <p style="margin: 0.5rem 0 0 0;">Te contactaremos pronto para confirmar los detalles.</p>
+                    </div>
+                `;
+
+            this.appendChild(successMessage);
+
+            // Resetear formulario y botón
+            this.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+
+            // Scroll suave hacia el mensaje
+            successMessage.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+
+            // Remover mensaje después de 5 segundos
+            setTimeout(() => {
+              successMessage.remove();
+            }, 5000);
+          }, 2000);
+        });
+
+      // Validación avanzada de fechas
+      const checkinDate = document.getElementById("checkin");
+      const checkoutDate = document.getElementById("checkout");
+
+      // Establecer fecha mínima como hoy
+      const today = new Date();
+      const minDate = today.toISOString().split("T")[0];
+      checkinDate.min = minDate;
+
+      checkinDate.addEventListener("change", function () {
+        const checkinValue = new Date(this.value);
+        const nextDay = new Date(checkinValue);
+        nextDay.setDate(nextDay.getDate() + 1);
+        checkoutDate.min = nextDay.toISOString().split("T")[0];
+
+        // Validar que checkout no sea anterior a checkin
+        if (
+          checkoutDate.value &&
+          new Date(checkoutDate.value) <= checkinValue
+        ) {
+          checkoutDate.value = nextDay.toISOString().split("T")[0];
+        }
+      });
+
+      // Navegación activa mejorada
+      window.addEventListener("scroll", () => {
+        const sections = document.querySelectorAll("section[id]");
+        const navLinksElements = document.querySelectorAll(".nav-links a");
+
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 120;
+          const sectionHeight = section.clientHeight;
+          if (
+            window.scrollY >= sectionTop &&
+            window.scrollY < sectionTop + sectionHeight
+          ) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinksElements.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
+      });
+
+      // Efectos de paralax sutil en elementos
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelectorAll(".service-icon");
+        const speed = 0.1;
+
+        parallax.forEach((element) => {
+          const yPos = -(scrolled * speed);
+          element.style.transform = `translateY(${yPos}px)`;
+        });
+      });
+
+      // Preloader (opcional)
+      window.addEventListener("load", () => {
+        document.body.classList.add("loaded");
+
+        // Iniciar animaciones de entrada después de que cargue
+        setTimeout(() => {
+          document.querySelectorAll(".fade-in").forEach((el, index) => {
+            setTimeout(() => {
+              el.style.transitionDelay = `${index * 0.1}s`;
+            }, 100);
+          });
+        }, 300);
+      });
+
+      // Mejora de rendimiento: throttle para eventos de scroll
+      function throttle(func, limit) {
+        let inThrottle;
+        return function () {
+          const args = arguments;
+          const context = this;
+          if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => (inThrottle = false), limit);
+          }
+        };
+      }
+
+      // Aplicar throttle a eventos de scroll pesados
+      window.addEventListener(
+        "scroll",
+        throttle(() => {
+          // Lógica de scroll optimizada aquí
+        }, 16)
+      ); // ~60fps
+
+      // Lazy loading para futuras imágenes
+      if ("IntersectionObserver" in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              img.classList.remove("lazy");
+              imageObserver.unobserve(img);
+            }
+          });
+        });
+
+        document.querySelectorAll("img[data-src]").forEach((img) => {
+          imageObserver.observe(img);
+        });
+      }
+
+      // Animaciones adicionales para interacciones
+      document.querySelectorAll(".service-card").forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-10px) scale(1.02)";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1)";
+        });
+      });
+
+      // Efecto de typing para títulos (opcional)
+      function typeWriter(element, text, speed = 100) {
+        let i = 0;
+        element.innerHTML = "";
+
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          }
+        }
+        type();
+      }
+
+      // Aplicar efecto typing al título principal cuando sea visible
+      const heroTitle = document.querySelector(".hero h1");
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // typeWriter(heroTitle, 'Vive una Experiencia Única', 80);
+            heroObserver.unobserve(entry.target);
+          }
+        });
+      });
+
+      if (heroTitle) {
+        heroObserver.observe(heroTitle);
+      }
+    </script>
+  </body>
+</html>
