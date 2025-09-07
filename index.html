@@ -1518,6 +1518,11 @@
           content: "";
         }
       }
+
+      .section {
+        content-visibility: auto;
+        contain-intrinsic-size: 1px 1000px;
+      }
     </style>
   </head>
   <body data-theme="light">
@@ -2861,6 +2866,16 @@
         window.addEventListener("resize", syncDesktopHeader);
         syncDesktopHeader();
       })();
+
+      if (!localStorage.getItem("theme")) {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        document.body.setAttribute(
+          "data-theme",
+          prefersDark ? "dark" : "light"
+        );
+      }
     </script>
   </body>
 </html>
