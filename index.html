@@ -14,6 +14,46 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- PWA -->
+    <link rel="manifest" href="/assets/json/manifest.json" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
+    <link
+      rel="apple-touch-icon"
+      href="/assets/favicons/apple-touch-icon.png"
+      sizes="180x180"
+    />
+    <link
+      rel="mask-icon"
+      href="/assets/favicons/safari-pinned-tab.svg"
+      color="#0a0a0a"
+    />
+    <!-- Opcional: theme-color adaptativo claro/oscuro -->
+    <meta
+      name="theme-color"
+      content="#0a0a0a"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#fafbfc"
+      media="(prefers-color-scheme: light)"
+    />
+
     <style>
       :root {
         /* Colores principales - Diseño moderno */
@@ -235,7 +275,7 @@
       .nav-container {
         max-width: 1400px;
         margin: 0 auto;
-        padding: var(--space-4) var(--space-6);
+        padding: var(--space-2) var(--space-6);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -266,6 +306,7 @@
         position: relative;
         transition: color var(--transition-fast);
         letter-spacing: 0.025em;
+        padding-bottom: 4px; /* espacio para el subrayado */
       }
 
       .nav-menu a:hover,
@@ -276,7 +317,7 @@
       .nav-menu a::after {
         content: "";
         position: absolute;
-        bottom: -8px;
+        bottom: 0; /* justo en el borde inferior */
         left: 50%;
         width: 0;
         height: 2px;
@@ -297,6 +338,7 @@
         gap: var(--space-4);
       }
 
+      /* Botón de cambio de tema */
       .theme-toggle {
         background: var(--bg-secondary);
         border: 1px solid var(--border);
@@ -317,14 +359,51 @@
         transform: scale(1.05);
       }
 
+      /* Botón de hamburguesa (menú móvil) */
       .mobile-menu-toggle {
-        display: none;
-        background: none;
-        border: none;
-        font-size: var(--font-size-lg);
-        color: var(--text-primary);
+        display: inline-block;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
-        padding: var(--space-2);
+        transition: all var(--transition-fast);
+        color: var(--text-secondary);
+      }
+      @media (min-width: 1024px) {
+        .mobile-menu-toggle {
+          display: none !important;
+        }
+      }
+
+      /* Botón de descarga (CV) */
+      .icon-btn {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        color: var(--text-secondary);
+        text-decoration: none;
+      }
+
+      .icon-btn i {
+        font-size: var(--font-size-lg);
+        transition: color var(--transition-fast);
+      }
+
+      .icon-btn:hover {
+        background: var(--bg-accent);
+        color: var(--primary);
+        transform: scale(1.05);
       }
 
       /* Hero Section Premium */
@@ -557,7 +636,7 @@
 
       .floating-card-3 {
         top: 60%;
-        right: 20%;
+        right: 10%;
         animation-delay: 4s;
       }
 
@@ -662,28 +741,57 @@
         transform: translateY(-2px);
       }
 
+      /* Contenedor principal de la imagen */
       .about-image {
-        position: relative;
+        position: relative; /* ✔ está bien */
       }
 
+      /* Contenedor de la imagen con dimensiones y estilo flexible */
       .image-placeholder {
+        aspect-ratio: 4 / 5; /* Mantiene una relación 4:5 */
+
+        /* Mejora responsive */
+        width: clamp(
+          250px,
+          80vw,
+          400px
+        ); /* Se adapta según el ancho del viewport */
+        margin-inline: auto; /* Centra en su columna */
+        border-radius: var(--radius-2xl); /* Borde redondeado */
+        overflow: hidden; /* Recorte limpio en los bordes */
+
+        /* Estilos adicionales para el contenedor con fondo y texto centrado */
         background: var(--gradient-hero);
-        border-radius: var(--radius-2xl);
-        aspect-ratio: 4/5;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: var(--font-size-6xl);
         color: white;
         position: relative;
-        overflow: hidden;
       }
 
+      /* Imagen dentro del contenedor */
+      .about-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Recorte elegante */
+        display: block; /* Elimina espacios fantasmas */
+      }
+
+      /* Overlay oscuro sobre la imagen */
       .image-overlay {
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.2);
-        border-radius: var(--radius-2xl);
+        background: rgba(0, 0, 0, 0.2); /* Filtro de sombra suave */
+        border-radius: var(--radius-2xl); /* Borde redondeado */
+      }
+
+      /* Estilos para pantallas más grandes (desktop) */
+      @media (min-width: 1024px) {
+        .image-placeholder {
+          width: 100%; /* Ocupa todo el ancho de la columna en desktop */
+          max-width: none; /* Permite que crezca más si es necesario */
+        }
       }
 
       /* Skills Section */
@@ -893,7 +1001,6 @@
         border-radius: var(--radius-xl);
         overflow: hidden;
         transition: all var(--transition-normal);
-        group: hover;
       }
 
       .project-card:hover {
@@ -1177,7 +1284,7 @@
         }
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: 1023px) {
         .nav-menu {
           display: none;
           position: absolute;
@@ -1518,11 +1625,6 @@
           content: "";
         }
       }
-
-      .section {
-        content-visibility: auto;
-        contain-intrinsic-size: 1px 1000px;
-      }
     </style>
   </head>
   <body data-theme="light">
@@ -1547,6 +1649,7 @@
           <li><a href="#contact" class="nav-link">Contacto</a></li>
         </ul>
         <div class="header-actions">
+          <!-- Tema -->
           <button
             class="theme-toggle"
             id="themeToggle"
@@ -1554,6 +1657,20 @@
           >
             <i class="fas fa-moon"></i>
           </button>
+
+          <!-- Descargar CV -->
+          <a
+            class="icon-btn"
+            id="cvDownload"
+            href="/assets/docs/CarlosPatino_CV.pdf"
+            download
+            aria-label="Descargar CV (PDF)"
+            title="Descargar CV"
+          >
+            <i class="fas fa-download"></i>
+          </a>
+
+          <!-- Menú móvil -->
           <button
             class="mobile-menu-toggle"
             id="mobileMenuToggle"
@@ -1574,17 +1691,19 @@
             Disponible para proyectos
           </div>
           <h1 class="hero-title">
-            Hola, soy <span class="gradient-text">Carlos Daniel</span><br />
+            Hola, soy <span class="gradient-text">Carlos Patiño</span><br />
             Full Stack Developer
           </h1>
           <p class="hero-description">
-            Especialista en crear experiencias digitales excepcionales con
-            React, Node.js y tecnologías modernas. Transformo ideas complejas en
-            soluciones elegantes y escalables.
+            Construyo soluciones <b>web y móviles</b> con <b>React</b>,
+            <b>Node.js</b> y <b>Flutter</b> (empírico). Integro
+            <b>PostgreSQL/SQLite</b>, aplico buenas prácticas de <b>UX</b> y
+            convierto ideas en productos <b>escalables, seguros</b> y fáciles de
+            usar.
           </p>
           <div class="hero-stats">
             <div class="stat-item">
-              <span class="stat-number">50+</span>
+              <span class="stat-number">25+</span>
               <span class="stat-label">Proyectos</span>
             </div>
             <div class="stat-item">
@@ -1601,9 +1720,15 @@
               <i class="fas fa-rocket"></i>
               Ver Proyectos
             </a>
-            <a href="#contact" class="btn btn-secondary">
-              <i class="fas fa-envelope"></i>
-              Hablemos
+            <a
+              href="https://wa.me/573229476426?text=Hola%20Carlos%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20hablar%20contigo.%20%F0%9F%91%8B"
+              class="btn btn-secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Escríbeme por WhatsApp"
+            >
+              <i class="fab fa-whatsapp"></i>
+              Hablemos por WhatsApp
             </a>
           </div>
         </div>
@@ -1612,13 +1737,14 @@
             <div class="code-snippet">
               <span class="code-line"
                 ><span class="keyword">const</span>
-                <span class="function">developer</span> = {</span
+                <span class="function">desarrollador</span> = {</span
               >
               <span class="code-line">
-                name: <span class="string">'Carlos Daniel'</span>,</span
+                name: <span class="string">'Carlos Patiño'</span>,</span
               >
               <span class="code-line">
-                role: <span class="string">'Full Stack Developer'</span>,</span
+                role:
+                <span class="string">'Desarrollador Full Stack'</span>,</span
               >
               <span class="code-line">
                 skills: [<span class="string">'React'</span>,
@@ -1627,19 +1753,40 @@
               >
               <span class="code-line">
                 passion:
-                <span class="string">'Creating amazing apps'</span></span
+                <span class="string">'Crear soluciones'</span></span
               >
               <span class="code-line">};</span>
-              <span class="code-line"
-                ><span class="comment"
-                  >// Ready to build your next project</span
-                ></span
+
+              <span
+                class="code-line"
+                style="display: inline-flex; align-items: center"
               >
+                <span class="comment">
+                  <span id="emailText" style="color: #999999"
+                    >// contact.carlosdev@gmail.com</span
+                  >
+                </span>
+                <button
+                  id="copyButton"
+                  onclick="copyEmail()"
+                  style="
+                    margin-left: 10px;
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                  "
+                >
+                  <i
+                    class="fa fa-copy"
+                    style="font-size: 18px; color: #06b6d4"
+                  ></i>
+                </button>
+              </span>
             </div>
           </div>
           <!-- Floating Cards -->
           <div class="floating-card floating-card-1">
-            <i class="fab fa-react" style="color: #61dafb; font-size: 24px"></i>
+            <i class="fab fa-react" style="color: #06b6d4; font-size: 24px"></i>
           </div>
           <div class="floating-card floating-card-2">
             <i
@@ -1678,30 +1825,28 @@
           >
             <h3>Mi enfoque</h3>
             <p>
-              Como desarrollador Full Stack, combino habilidades técnicas
-              sólidas con un profundo entendimiento del diseño UX para crear
-              aplicaciones web que no solo funcionan perfectamente, sino que
-              también ofrecen experiencias excepcionales.
+              Combino frontend (React, HTML, CSS, JS) y backend (Node.js, APIs
+              REST, bases de datos) con criterios de UX para que cada producto
+              sea útil y fácil de usar.
             </p>
             <p>
-              Mi experiencia abarca desde el desarrollo frontend con React hasta
-              la arquitectura backend con Node.js, pasando por la gestión de
-              datos y la optimización de rendimiento. Siempre busco las mejores
-              prácticas y tecnologías emergentes.
+              Desarrollador móvil <b>Flutter</b> de forma empírica con
+              <b>SQLite</b> para almacenamiento local, y <b>PostgreSQL</b> para
+              proyectos web. Optimización de rendimiento y seguridad.
             </p>
             <p>
-              Trabajo con metodologías ágiles, tengo experiencia en equipos
-              remotos y me especializo en convertir ideas complejas en productos
-              digitales escalables y mantenibles.
+              Trabajo con metodologías ágiles y en entornos remotos, priorizando
+              código limpio, mantenibilidad y escalabilidad.
             </p>
             <div class="skills-tags">
               <span class="skill-tag">React.js</span>
               <span class="skill-tag">Node.js</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">UX Design</span>
-              <span class="skill-tag">Full Stack</span>
+              <span class="skill-tag">Flutter</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">SQLite</span>
               <span class="skill-tag">API REST</span>
-              <span class="skill-tag">Responsive</span>
+              <span class="skill-tag">UX</span>
+              <span class="skill-tag">Git</span>
               <span class="skill-tag">Agile</span>
             </div>
           </div>
@@ -1710,7 +1855,16 @@
             style="transform: translateY(40px)"
           >
             <div class="image-placeholder">
-              <i class="fas fa-code"></i>
+              <img
+                src="assets/img/profile.webp"
+                alt="Carlos Patiño - Full Stack Developer"
+                class="about-photo"
+                width="800"
+                height="1000"
+                loading="eager"
+                fetchpriority="high"
+              />
+
               <div class="image-overlay"></div>
             </div>
           </div>
@@ -1884,6 +2038,31 @@
           </p>
         </div>
         <div class="timeline">
+          <!-- Flutter empírico -->
+          <div
+            class="timeline-item animate-on-scroll"
+            style="transform: translateY(40px)"
+          >
+            <div class="timeline-card">
+              <div class="timeline-date">2025</div>
+              <h3 class="timeline-title">
+                Flutter (empírico) · Desarrollo móvil
+              </h3>
+              <p class="timeline-subtitle">
+                Autoformación y proyectos personales
+              </p>
+              <p class="timeline-description">
+                Construcción de apps móviles con <b>Flutter/Dart</b>,
+                almacenamiento local con <b>SQLite</b>, consumo de
+                <b>APIs REST</b>, gestión de estado (Provider/BLoC), Material 3,
+                autenticación y despliegue en Android. Integración con backends
+                en <b>Node.js</b>.
+              </p>
+              <div class="certification-badge">
+                <i class="fas fa-user-cog"></i> Experiencia práctica
+              </div>
+            </div>
+          </div>
           <div
             class="timeline-item animate-on-scroll"
             style="transform: translateY(40px)"
@@ -2268,7 +2447,7 @@
             >
               Envíame un mensaje
             </h3>
-            <form id="contactForm">
+            <form id="contactForm" autocomplete="on">
               <div class="form-group">
                 <label for="name" class="form-label">Nombre completo</label>
                 <input
@@ -2277,8 +2456,12 @@
                   name="name"
                   class="form-input"
                   required
+                  autocomplete="name"
+                  autocapitalize="words"
+                  inputmode="text"
                 />
               </div>
+
               <div class="form-group">
                 <label for="email" class="form-label">Correo electrónico</label>
                 <input
@@ -2287,8 +2470,11 @@
                   name="email"
                   class="form-input"
                   required
+                  autocomplete="email"
+                  inputmode="email"
                 />
               </div>
+
               <div class="form-group">
                 <label for="subject" class="form-label">Asunto</label>
                 <input
@@ -2297,8 +2483,12 @@
                   name="subject"
                   class="form-input"
                   required
+                  autocomplete="off"
+                  autocapitalize="sentences"
+                  inputmode="text"
                 />
               </div>
+
               <div class="form-group">
                 <label for="message" class="form-label">Mensaje</label>
                 <textarea
@@ -2306,8 +2496,12 @@
                   name="message"
                   class="form-textarea"
                   required
+                  autocomplete="off"
+                  autocapitalize="sentences"
+                  inputmode="text"
                 ></textarea>
               </div>
+
               <button type="submit" class="btn btn-primary" style="width: 100%">
                 <i class="fas fa-paper-plane"></i>
                 Enviar Mensaje
@@ -2335,17 +2529,7 @@
               </div>
               <div class="contact-details">
                 <h4>Email</h4>
-                <p>carlos.patino.cajamarca@email.com</p>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i class="fas fa-phone"></i>
-              </div>
-              <div class="contact-details">
-                <h4>Teléfono</h4>
-                <p>+57 (XXX) XXX-XXXX</p>
+                <p>contact.carlosdev@gmail.com</p>
               </div>
             </div>
 
@@ -2355,7 +2539,10 @@
               </div>
               <div class="contact-details">
                 <h4>Ubicación</h4>
-                <p>Colombia</p>
+                <p>
+                  Mascate, Omán
+                  <span style="color: var(--text-tertiary)">(colombiano)</span>
+                </p>
               </div>
             </div>
 
@@ -2365,22 +2552,65 @@
               </div>
               <div class="contact-details">
                 <h4>Disponibilidad</h4>
-                <p>Lun - Vie: 9:00 AM - 6:00 PM</p>
+                <p>Lun–Vie: 9:00–18:00 (GMT+4, Mascate)</p>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-bolt"></i>
+              </div>
+              <div class="contact-details">
+                <h4>Tiempo de respuesta</h4>
+                <p>Menos de 24h (días hábiles)</p>
               </div>
             </div>
 
             <div class="social-links">
-              <a href="#" class="social-link" aria-label="LinkedIn">
+              <a
+                href="https://wa.me/573229476426?text=Hola%20Carlos%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20hablar%20contigo.%20%F0%9F%91%8B"
+                class="social-link"
+                aria-label="WhatsApp"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-whatsapp"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/carlos-daniel-pati%C3%B1o-cajamarca-655519315/"
+                class="social-link"
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i class="fab fa-linkedin"></i>
               </a>
-              <a href="#" class="social-link" aria-label="GitHub">
+              <a
+                href="https://github.com/C-D-P-C"
+                class="social-link"
+                aria-label="GitHub"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i class="fab fa-github"></i>
               </a>
-              <a href="#" class="social-link" aria-label="Twitter">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="#" class="social-link" aria-label="Instagram">
+              <a
+                href="https://www.instagram.com/carlos.daniel.pc/"
+                class="social-link"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://www.facebook.com/carlos.daniel.pc7/"
+                class="social-link"
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="fab fa-facebook"></i>
               </a>
             </div>
           </div>
@@ -2468,8 +2698,12 @@
           });
 
           // Close mobile menu on window resize
+          // NavigationManager.bindEvents()  ➜ reemplaza el listener de resize:
           window.addEventListener("resize", () => {
-            if (window.innerWidth > 768 && this.isMenuOpen) {
+            if (
+              window.matchMedia("(min-width: 1024px)").matches &&
+              this.isMenuOpen
+            ) {
               this.closeMobileMenu();
             }
           });
@@ -2528,8 +2762,10 @@
 
           navLinks.forEach((link) => {
             link.classList.remove("active");
+            link.removeAttribute("aria-current");
             if (link.getAttribute("href") === `#${current}`) {
               link.classList.add("active");
+              link.setAttribute("aria-current", "page");
             }
           });
         }
@@ -2538,18 +2774,18 @@
       // Scroll Management
       class ScrollManager {
         constructor() {
+          this.handleScroll = this.handleScroll.bind(this);
+          this.throttled = throttle(this.handleScroll, 16); // ~60fps
           this.init();
         }
 
         init() {
-          this.bindEvents();
-        }
-
-        bindEvents() {
-          window.addEventListener("scroll", () => this.handleScroll());
+          window.addEventListener("scroll", this.throttled, { passive: true });
           scrollToTop.addEventListener("click", () =>
             this.scrollToTopHandler()
           );
+          // Ejecuta una vez para estado inicial
+          this.handleScroll();
         }
 
         handleScroll() {
@@ -2562,33 +2798,20 @@
         updateScrollProgress() {
           const scrollHeight =
             document.documentElement.scrollHeight - window.innerHeight;
-          const scrollProgress = (window.scrollY / scrollHeight) * 100;
-          document.querySelector(
-            ".scroll-progress"
-          ).style.transform = `scaleX(${scrollProgress / 100})`;
+          const ratio = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+          scrollProgress.style.transform = `scaleX(${ratio})`;
         }
 
         updateHeaderState() {
-          if (window.scrollY > 100) {
-            header.classList.add("scrolled");
-          } else {
-            header.classList.remove("scrolled");
-          }
+          header.classList.toggle("scrolled", window.scrollY > 100);
         }
 
         updateScrollToTopButton() {
-          if (window.scrollY > 500) {
-            scrollToTop.classList.add("visible");
-          } else {
-            scrollToTop.classList.remove("visible");
-          }
+          scrollToTop.classList.toggle("visible", window.scrollY > 500);
         }
 
         scrollToTopHandler() {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }
       }
 
@@ -2714,37 +2937,6 @@
       // Bind theme toggle
       themeToggle.addEventListener("click", () => themeManager.toggle());
 
-      // Optimized scroll handling
-      const handleScroll = throttle(() => scrollManager.handleScroll(), 16);
-      window.removeEventListener("scroll", scrollManager.handleScroll);
-      window.addEventListener("scroll", handleScroll, { passive: true });
-
-      // Preload critical resources
-      const preloadCriticalAssets = () => {
-        // Preload fonts
-        const fontLinks = [
-          "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeMZs.woff2",
-          "https://fonts.gstatic.com/s/jetbrainsmono/v13/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPVmUsaaDhw.woff2",
-        ];
-
-        fontLinks.forEach((href) => {
-          const link = document.createElement("link");
-          link.rel = "preload";
-          link.href = href;
-          link.as = "font";
-          link.type = "font/woff2";
-          link.crossOrigin = "anonymous";
-          document.head.appendChild(link);
-        });
-      };
-
-      // Initialize when DOM is ready
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", preloadCriticalAssets);
-      } else {
-        preloadCriticalAssets();
-      }
-
       // Add accessibility improvements
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && navigationManager.isMenuOpen) {
@@ -2752,46 +2944,7 @@
         }
       });
 
-      // Prevent zoom on iOS double tap
-      let lastTouchEnd = 0;
-      document.addEventListener(
-        "touchend",
-        (e) => {
-          const now = Date.now();
-          if (now - lastTouchEnd <= 300) {
-            e.preventDefault();
-          }
-          lastTouchEnd = now;
-        },
-        { passive: false }
-      );
-
-      // Add focus management for better accessibility
-      const focusableElements =
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Tab") {
-          const focusableContent = document.querySelectorAll(focusableElements);
-          const firstFocusableElement = focusableContent[0];
-          const lastFocusableElement =
-            focusableContent[focusableContent.length - 1];
-
-          if (e.shiftKey) {
-            if (document.activeElement === firstFocusableElement) {
-              lastFocusableElement.focus();
-              e.preventDefault();
-            }
-          } else {
-            if (document.activeElement === lastFocusableElement) {
-              firstFocusableElement.focus();
-              e.preventDefault();
-            }
-          }
-        }
-      });
-
-      console.log("🚀 Portfolio de Carlos Daniel cargado exitosamente!");
+      console.log("🚀 Portfolio de Carlos Patiño cargado exitosamente!");
 
       /* ========== MOBILE-FIRST JS FIX PACK ========== */
 
@@ -2836,11 +2989,7 @@
         }
       });
 
-      /* 4) Eliminar el bloqueo de doble-tap (rompe zoom y gestos en iOS) */
-      // Elimina/ comenta este bloque si existe en tu código:
-      // document.addEventListener('touchend', ... );
-
-      /* 5) Evita saltos al cargar fuentes (CLS menor) */
+      /* 4) Evita saltos al cargar fuentes (CLS menor) */
       if ("fonts" in document) {
         document.fonts.ready.then(() => {
           setScrollMargins();
@@ -2867,14 +3016,22 @@
         syncDesktopHeader();
       })();
 
-      if (!localStorage.getItem("theme")) {
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-        document.body.setAttribute(
-          "data-theme",
-          prefersDark ? "dark" : "light"
-        );
+      function copyEmail() {
+        const email = "contact.carlosdev@gmail.com";
+        navigator.clipboard.writeText(email).then(() => {
+          alert("Correo copiado al portapapeles");
+        });
+      }
+    </script>
+    <script>
+      // Registro del Service Worker (crearemos /sw.js cuando me digas)
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((reg) => console.log("SW registrado:", reg.scope))
+            .catch((err) => console.warn("SW no registrado:", err));
+        });
       }
     </script>
   </body>
