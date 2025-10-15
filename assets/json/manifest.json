@@ -1,0 +1,76 @@
+{
+  "id": "/",
+  "name": "Carlos Patiño — Portfolio",
+  "short_name": "CarlosDev",
+  "description": "Portafolio de Carlos Daniel Patiño Cajamarca — Senior Full Stack Developer.",
+  "lang": "es",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0a0a0a",
+  "background_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/assets/favicons/icon.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/favicons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/favicons/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/favicons/hero.webp",
+      "sizes": "1200x800",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Hero — Presentación"
+    },
+    {
+      "src": "/assets/favicons/hero@2x.webp",
+      "sizes": "2400x1600",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Hero 2x — Alta resolución"
+    },
+    {
+      "src": "/assets/favicons/og-banner.webp",
+      "sizes": "1200x630",
+      "type": "image/webp",
+      "label": "Banner OG — Vista previa social"
+    }
+  ],
+  "categories": ["portfolio", "business", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Ver Proyectos",
+      "short_name": "Proyectos",
+      "url": "/#projects",
+      "icons": [
+        {
+          "src": "/assets/favicons/icon.webp",
+          "sizes": "512x512",
+          "type": "image/webp",
+          "purpose": "any"
+        }
+      ]
+    },
+    {
+      "name": "Contacto",
+      "short_name": "Contacto",
+      "url": "/#contact"
+    }
+  ]
+}
